@@ -39,7 +39,7 @@
             toolStripSplitButton1 = new ToolStripSeparator();
             toolStripTextBox1 = new ToolStripTextBox();
             SearchButton = new ToolStripButton();
-            listView1 = new ListView();
+            listViewTokens = new ListView();
             ID = new ColumnHeader();
             Type = new ColumnHeader();
             FIO = new ColumnHeader();
@@ -63,7 +63,7 @@
             toolStrip1.Items.AddRange(new ToolStripItem[] { OpenAddTokenFormButton, DeleteTokenButton, RefreshButton, toolStripSeparator1, toolStripComboBox1, toolStripComboBox2, toolStripSplitButton1, toolStripTextBox1, SearchButton });
             toolStrip1.Location = new Point(12, 8);
             toolStrip1.Name = "toolStrip1";
-            toolStrip1.Size = new Size(483, 25);
+            toolStrip1.Size = new Size(452, 25);
             toolStrip1.TabIndex = 0;
             toolStrip1.Text = "toolStrip1";
             // 
@@ -134,18 +134,18 @@
             SearchButton.Text = "Поиск";
             SearchButton.Click += SearchButton_Click;
             // 
-            // listView1
+            // listViewTokens
             // 
-            listView1.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            listView1.Columns.AddRange(new ColumnHeader[] { ID, Type, FIO, Department, Destiny, Action, SerialNumber, InterCertCenter, RootCertCenter, Status, DateStart, DateEnd });
-            listView1.FullRowSelect = true;
-            listView1.Location = new Point(12, 34);
-            listView1.MultiSelect = false;
-            listView1.Name = "listView1";
-            listView1.Size = new Size(1168, 404);
-            listView1.TabIndex = 1;
-            listView1.UseCompatibleStateImageBehavior = false;
-            listView1.View = View.Details;
+            listViewTokens.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            listViewTokens.Columns.AddRange(new ColumnHeader[] { ID, Type, FIO, Department, Destiny, Action, SerialNumber, InterCertCenter, RootCertCenter, Status, DateStart, DateEnd });
+            listViewTokens.FullRowSelect = true;
+            listViewTokens.Location = new Point(12, 34);
+            listViewTokens.MultiSelect = false;
+            listViewTokens.Name = "listViewTokens";
+            listViewTokens.Size = new Size(1168, 404);
+            listViewTokens.TabIndex = 1;
+            listViewTokens.UseCompatibleStateImageBehavior = false;
+            listViewTokens.View = View.Details;
             // 
             // ID
             // 
@@ -210,7 +210,7 @@
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1192, 450);
-            Controls.Add(listView1);
+            Controls.Add(listViewTokens);
             Controls.Add(toolStrip1);
             Name = "MainForm";
             StartPosition = FormStartPosition.CenterScreen;
@@ -245,6 +245,6 @@
         private ColumnHeader Status;
         private ColumnHeader DateStart;
         private ColumnHeader DateEnd;
-        public ListView listView1;
+        public ListView listViewTokens;
     }
 }

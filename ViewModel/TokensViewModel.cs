@@ -58,7 +58,7 @@ namespace WinFormsApp1.ViewModel
 
         public List<Token> FilterStatusList(string status)
         {
-            if (status == "Все")
+            if (status == "Все" || string.IsNullOrEmpty(status))
                 return this.Tokens;
             else
                 return this.Tokens.Where(x => x.Status == status).ToList();

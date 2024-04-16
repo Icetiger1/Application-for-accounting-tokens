@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using WinFormsApp1.Infrastructure;
 using WinFormsApp1.Model;
 using WinFormsApp1.ViewModel;
@@ -15,6 +16,7 @@ namespace WinFormsApp1
         {
             InitializeComponent();
 
+            //Заменить на получение данных из БД
             TokensCreator tokenCreator = new();
             for (int i = 0; i < 5; i++)
             {
@@ -29,30 +31,32 @@ namespace WinFormsApp1
         {
             AddTokenForm f2 = new()
             {
-                lv = listView1
+                lv = listViewTokens
             };
-            f2.ButtonClicked += Form2ButtonClicked;
+            f2.ButtonClicked += RefreshButton_Click;
             f2.Show();
         }
-
-        private void Form2ButtonClicked(object sender, EventArgs e)
-        {
-            listView1.Items.Clear();
-            FillListView(FullTokens);
-        }
-
+        /// <summary>
+        /// Событие обновления данных в таблице listViewTokens
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void RefreshButton_Click(object sender, EventArgs e)
         {
-            listView1.Items.Clear();
+            listViewTokens.Items.Clear();
             FillListView(FullTokens);
         }
-
+        /// <summary>
+        /// Удаление выбранного элемента из объекта FullTokens
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void DeleteTokenButton_Click(object sender, EventArgs e)
         {
-            int index = listView1.SelectedIndices[0];
-            FullTokens.Delete(int.Parse(listView1.Items[index].SubItems[0].Text));
+            int index = listViewTokens.SelectedIndices[0];
+            FullTokens.Delete(int.Parse(listViewTokens.Items[index].SubItems[0].Text));
 
-            listView1.Items.Clear();
+            listViewTokens.Items.Clear();
             FillListView(FullTokens);
         }
 
@@ -60,16 +64,21 @@ namespace WinFormsApp1
         {
 
         }
-
+        /// <summary>
+        /// Заполнение listViewTokens
+        /// </summary>
+        /// <param name="tokens"></param>
         private void FillListView(TokensViewModel tokens)
         {
             foreach (Token token in tokens)
             {
                 ListViewItem item = token.AddToListViewItem();
-                listView1.Items.Add(item);
+                listViewTokens.Items.Add(item);
             }
         }
-
+        /// <summary>
+        /// Заполнение toolStripComboBox2 для дальнейшей фильтрации по статусу токена
+        /// </summary>
         private void FillComboBoxStatuses()
         {
             toolStripComboBox2.Items.Add("Все");
@@ -92,13 +101,11 @@ namespace WinFormsApp1
 
         private void toolStripComboBox2_SelectedIndexChanged(object sender, EventArgs e)
         {
-            listView1.Items.Clear();
+            listViewTokens.Items.Clear();
 
             string selectStatus = toolStripComboBox2.SelectedItem.ToString();
 
-            List<Token> filtr_Tokens = FullTokens.FilterStatusList(selectStatus);
-            Filtr = new(filtr_Tokens);
-            FillListView(Filtr);
+            FillListView(new((List<Token>)FullTokens.FilterStatusList(selectStatus)));
         }
     }
 }
