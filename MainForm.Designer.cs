@@ -63,7 +63,7 @@
             toolStrip1.Items.AddRange(new ToolStripItem[] { OpenAddTokenFormButton, DeleteTokenButton, RefreshButton, toolStripSeparator1, toolStripComboBox1, toolStripComboBox2, toolStripSplitButton1, toolStripTextBox1, SearchButton });
             toolStrip1.Location = new Point(12, 8);
             toolStrip1.Name = "toolStrip1";
-            toolStrip1.Size = new Size(485, 25);
+            toolStrip1.Size = new Size(483, 25);
             toolStrip1.TabIndex = 0;
             toolStrip1.Text = "toolStrip1";
             // 
@@ -105,13 +105,14 @@
             // toolStripComboBox1
             // 
             toolStripComboBox1.Name = "toolStripComboBox1";
-            toolStripComboBox1.Size = new Size(51, 22);
-            toolStripComboBox1.Text = "Фильтр:";
+            toolStripComboBox1.Size = new Size(46, 22);
+            toolStripComboBox1.Text = "Статус:";
             // 
             // toolStripComboBox2
             // 
             toolStripComboBox2.Name = "toolStripComboBox2";
             toolStripComboBox2.Size = new Size(121, 25);
+            toolStripComboBox2.SelectedIndexChanged += toolStripComboBox2_SelectedIndexChanged;
             // 
             // toolStripSplitButton1
             // 

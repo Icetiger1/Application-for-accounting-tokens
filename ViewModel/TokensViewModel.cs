@@ -18,6 +18,11 @@ namespace WinFormsApp1.ViewModel
             this.Tokens = new List<Token>();
         }
 
+        public TokensViewModel(List<Token> tokens)
+        {
+            this.Tokens = tokens;
+        }
+
         public void Append(Token token)
         {
             this.Tokens.Add(token);
@@ -51,9 +56,17 @@ namespace WinFormsApp1.ViewModel
             }            
         }
 
+        public List<Token> FilterStatusList(string status)
+        {
+            if (status == "Все")
+                return this.Tokens;
+            else
+                return this.Tokens.Where(x => x.Status == status).ToList();
+        }
+
         public IEnumerator GetEnumerator()
         {
-            return ((IEnumerable)Tokens).GetEnumerator();
+            return ((IEnumerable)this.Tokens).GetEnumerator();
         }
     }
 }

@@ -1,12 +1,15 @@
 using WinFormsApp1.Infrastructure;
 using WinFormsApp1.Model;
 using WinFormsApp1.ViewModel;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace WinFormsApp1
 {
     public partial class MainForm : Form
     {
-        public static TokensViewModel Tokens = new();
+        public static TokensViewModel FullTokens = new();
+        public static TokensViewModel Filtr;
+
 
         public MainForm()
         {
@@ -15,10 +18,11 @@ namespace WinFormsApp1
             TokensCreator tokenCreator = new();
             for (int i = 0; i < 5; i++)
             {
-                Tokens.Append((Token)tokenCreator.GetContact());
+                FullTokens.Append((Token)tokenCreator.GetContact());
             }
 
-            AddToListView();
+            FillListView(FullTokens);
+            FillComboBoxStatuses();
         }
 
         private void OpenAddTokenFormButton_Click(object sender, EventArgs e)
@@ -34,36 +38,67 @@ namespace WinFormsApp1
         private void Form2ButtonClicked(object sender, EventArgs e)
         {
             listView1.Items.Clear();
-            AddToListView();
+            FillListView(FullTokens);
         }
 
         private void RefreshButton_Click(object sender, EventArgs e)
         {
             listView1.Items.Clear();
-            AddToListView();
+            FillListView(FullTokens);
         }
 
         private void DeleteTokenButton_Click(object sender, EventArgs e)
         {
             int index = listView1.SelectedIndices[0];
-            Tokens.Delete(int.Parse(listView1.Items[index].SubItems[0].Text));
+            FullTokens.Delete(int.Parse(listView1.Items[index].SubItems[0].Text));
 
             listView1.Items.Clear();
-            AddToListView();
+            FillListView(FullTokens);
         }
 
-        private void AddToListView()
+        private void SearchButton_Click(object sender, EventArgs e)
         {
-            foreach (Token token in Tokens)
+
+        }
+
+        private void FillListView(TokensViewModel tokens)
+        {
+            foreach (Token token in tokens)
             {
                 ListViewItem item = token.AddToListViewItem();
                 listView1.Items.Add(item);
             }
         }
 
-        private void SearchButton_Click(object sender, EventArgs e)
+        private void FillComboBoxStatuses()
         {
+            toolStripComboBox2.Items.Add("Все");
 
+            foreach (string status in (HashSet<string>)GetStatusList())
+            {
+                toolStripComboBox2.Items.Add(status);
+            }
+        }
+
+        private HashSet<string> GetStatusList()
+        {
+            HashSet<string> statusList = new HashSet<string>();
+            foreach (Token token in FullTokens)
+            {
+                statusList.Add(token.Status);
+            }
+            return statusList;
+        }
+
+        private void toolStripComboBox2_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            listView1.Items.Clear();
+
+            string selectStatus = toolStripComboBox2.SelectedItem.ToString();
+
+            List<Token> filtr_Tokens = FullTokens.FilterStatusList(selectStatus);
+            Filtr = new(filtr_Tokens);
+            FillListView(Filtr);
         }
     }
 }

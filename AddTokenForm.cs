@@ -47,7 +47,7 @@ namespace WinFormsApp1
                 dateTimePicker2.Value
                 );
 
-            MainForm.Tokens.Append(token);
+            MainForm.FullTokens.Append(token);
             OnButtonClicked(EventArgs.Empty);
             this.Close();
         }
