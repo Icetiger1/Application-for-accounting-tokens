@@ -35,10 +35,12 @@
             RefreshButton = new ToolStripButton();
             toolStripSeparator1 = new ToolStripSeparator();
             toolStripComboBox1 = new ToolStripLabel();
-            toolStripComboBox2 = new ToolStripComboBox();
+            statusComboBox = new ToolStripComboBox();
             toolStripSplitButton1 = new ToolStripSeparator();
             toolStripTextBox1 = new ToolStripTextBox();
             SearchButton = new ToolStripButton();
+            toolStripDropDownButton1 = new ToolStripDropDownButton();
+            загрузитьСписокПользователейActiveDirectoryToolStripMenuItem = new ToolStripMenuItem();
             listViewTokens = new ListView();
             ID = new ColumnHeader();
             Type = new ColumnHeader();
@@ -52,6 +54,7 @@
             Status = new ColumnHeader();
             DateStart = new ColumnHeader();
             DateEnd = new ColumnHeader();
+            toolStripButton1 = new ToolStripButton();
             toolStrip1.SuspendLayout();
             SuspendLayout();
             // 
@@ -60,10 +63,10 @@
             toolStrip1.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             toolStrip1.Dock = DockStyle.None;
             toolStrip1.ImageScalingSize = new Size(18, 18);
-            toolStrip1.Items.AddRange(new ToolStripItem[] { OpenAddTokenFormButton, DeleteTokenButton, RefreshButton, toolStripSeparator1, toolStripComboBox1, toolStripComboBox2, toolStripSplitButton1, toolStripTextBox1, SearchButton });
+            toolStrip1.Items.AddRange(new ToolStripItem[] { OpenAddTokenFormButton, DeleteTokenButton, RefreshButton, toolStripSeparator1, toolStripComboBox1, statusComboBox, toolStripSplitButton1, toolStripTextBox1, SearchButton, toolStripDropDownButton1, toolStripButton1 });
             toolStrip1.Location = new Point(12, 8);
             toolStrip1.Name = "toolStrip1";
-            toolStrip1.Size = new Size(452, 25);
+            toolStrip1.Size = new Size(694, 25);
             toolStrip1.TabIndex = 0;
             toolStrip1.Text = "toolStrip1";
             // 
@@ -108,11 +111,11 @@
             toolStripComboBox1.Size = new Size(46, 22);
             toolStripComboBox1.Text = "Статус:";
             // 
-            // toolStripComboBox2
+            // statusComboBox
             // 
-            toolStripComboBox2.Name = "toolStripComboBox2";
-            toolStripComboBox2.Size = new Size(121, 25);
-            toolStripComboBox2.SelectedIndexChanged += toolStripComboBox2_SelectedIndexChanged;
+            statusComboBox.Name = "statusComboBox";
+            statusComboBox.Size = new Size(121, 25);
+            statusComboBox.SelectedIndexChanged += StatusComboBox_SelectedIndexChanged;
             // 
             // toolStripSplitButton1
             // 
@@ -133,6 +136,22 @@
             SearchButton.Size = new Size(46, 22);
             SearchButton.Text = "Поиск";
             SearchButton.Click += SearchButton_Click;
+            // 
+            // toolStripDropDownButton1
+            // 
+            toolStripDropDownButton1.DisplayStyle = ToolStripItemDisplayStyle.Text;
+            toolStripDropDownButton1.DropDownItems.AddRange(new ToolStripItem[] { загрузитьСписокПользователейActiveDirectoryToolStripMenuItem });
+            toolStripDropDownButton1.Image = (Image)resources.GetObject("toolStripDropDownButton1.Image");
+            toolStripDropDownButton1.ImageTransparentColor = Color.Magenta;
+            toolStripDropDownButton1.Name = "toolStripDropDownButton1";
+            toolStripDropDownButton1.Size = new Size(135, 19);
+            toolStripDropDownButton1.Text = "Для администратора";
+            // 
+            // загрузитьСписокПользователейActiveDirectoryToolStripMenuItem
+            // 
+            загрузитьСписокПользователейActiveDirectoryToolStripMenuItem.Name = "загрузитьСписокПользователейActiveDirectoryToolStripMenuItem";
+            загрузитьСписокПользователейActiveDirectoryToolStripMenuItem.Size = new Size(350, 22);
+            загрузитьСписокПользователейActiveDirectoryToolStripMenuItem.Text = "Загрузить список пользователей (Active Directory)";
             // 
             // listViewTokens
             // 
@@ -205,6 +224,15 @@
             DateEnd.Text = "Дата окончания";
             DateEnd.Width = 120;
             // 
+            // toolStripButton1
+            // 
+            toolStripButton1.DisplayStyle = ToolStripItemDisplayStyle.Text;
+            toolStripButton1.Image = (Image)resources.GetObject("toolStripButton1.Image");
+            toolStripButton1.ImageTransparentColor = Color.Magenta;
+            toolStripButton1.Name = "toolStripButton1";
+            toolStripButton1.Size = new Size(107, 22);
+            toolStripButton1.Text = "Выгрузить в Excel";
+            // 
             // MainForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -229,7 +257,7 @@
         private ToolStripButton RefreshButton;
         private ToolStripSeparator toolStripSeparator1;
         private ToolStripLabel toolStripComboBox1;
-        private ToolStripComboBox toolStripComboBox2;
+        private ToolStripComboBox statusComboBox;
         private ToolStripSeparator toolStripSplitButton1;
         private ToolStripTextBox toolStripTextBox1;
         private ToolStripButton SearchButton;
@@ -246,5 +274,8 @@
         private ColumnHeader DateStart;
         private ColumnHeader DateEnd;
         public ListView listViewTokens;
+        private ToolStripDropDownButton toolStripDropDownButton1;
+        private ToolStripMenuItem загрузитьСписокПользователейActiveDirectoryToolStripMenuItem;
+        private ToolStripButton toolStripButton1;
     }
 }

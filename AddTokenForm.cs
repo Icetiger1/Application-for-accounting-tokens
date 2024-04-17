@@ -34,8 +34,6 @@ namespace WinFormsApp1
         private void AddTokenButton_Click(object sender, EventArgs e)
         {
             Token token = new(lv.Items.Count, 
-                comboBox1.SelectedItem.ToString(),
-                textBox1.Text,
                 comboBox2.SelectedItem.ToString(),
                 comboBox3.SelectedItem.ToString(),
                 comboBox4.SelectedItem.ToString(),
@@ -46,8 +44,12 @@ namespace WinFormsApp1
                 dateTimePicker1.Value,
                 dateTimePicker2.Value
                 );
-
-            MainForm.FullTokens.Append(token);
+            User user = new(
+                comboBox1.SelectedItem.ToString(),
+                String.Empty,
+                textBox1.Text
+                );
+            MainForm.FullTokens.Append(token, user);
             OnButtonClicked(EventArgs.Empty);
             this.Close();
         }

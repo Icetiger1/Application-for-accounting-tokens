@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.VisualBasic.ApplicationServices;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -6,62 +7,65 @@ using System.Text;
 using System.Threading.Tasks;
 using WinFormsApp1.Infrastructure;
 using WinFormsApp1.Model;
+using User = WinFormsApp1.Model.User;
 
 namespace WinFormsApp1.ViewModel
 {
     public class TokensViewModel : IEnumerable
     {
-        public List<Token> Tokens { get; set; }
+        public Dictionary<Token, User> Tokens { get; set; }
 
         public TokensViewModel()
         {
-            this.Tokens = new List<Token>();
+            this.Tokens = new Dictionary<Token, User>();
         }
 
-        public TokensViewModel(List<Token> tokens)
+        public TokensViewModel(Dictionary<Token, User> tokens)
         {
             this.Tokens = tokens;
         }
 
-        public void Append(Token token)
+        public void Append(Token token, User user)
         {
-            this.Tokens.Add(token);
+            this.Tokens.Add(token, user);
         }
 
-        public List<Token> GetAll()
+        public Dictionary<Token, User> GetAll()
         {
-            return this.Tokens.ToList();
+            return this.Tokens;
         }
 
-        public Token? Get(int id)
+        public KeyValuePair<Token, User>? Get(int id)
         {
-            return this.Tokens.FirstOrDefault(x => x.Id == id) ?? null;
+            return this.Tokens.FirstOrDefault(x => x.Key.Id == id);
         }
 
-        public void Update(int id, Token token)
+        public void Update(int id, Token token, User user)
         {
-            var item = this.Tokens.FirstOrDefault(x => x.Id == id);
-            if (item != null)
+            var item = this.Tokens.FirstOrDefault(x => x.Key.Id == id);
+            if (!item.Equals(null))
             {
-                item = token;
+                item = new KeyValuePair<Token, User>(token, user);
             }
         }
 
         public void Delete(int id)
         {
-            var item = this.Tokens.FirstOrDefault(x => x.Id == id);
-            if (item != null)
+            var item = this.Tokens.FirstOrDefault(x => x.Key.Id == id);
+            if (!item.Equals(null))
             {
-                this.Tokens.Remove(item);
+                this.Tokens.Remove(item.Key);
             }            
         }
 
-        public List<Token> FilterStatusList(string status)
+        public Dictionary<Token, User> FilterStatusList(string status)
         {
             if (status == "Все" || string.IsNullOrEmpty(status))
                 return this.Tokens;
             else
-                return this.Tokens.Where(x => x.Status == status).ToList();
+                return this.Tokens
+                    .Where(x => x.Key.Status == status)
+                    .ToDictionary(x => x.Key, x => x.Value);
         }
 
         public IEnumerator GetEnumerator()

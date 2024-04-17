@@ -9,7 +9,7 @@ namespace WinFormsApp1
     public partial class MainForm : Form
     {
         public static TokensViewModel FullTokens = new();
-        public static TokensViewModel Filtr;
+        public static TokensViewModel? Filtr;
 
 
         public MainForm()
@@ -18,9 +18,11 @@ namespace WinFormsApp1
 
             //Заменить на получение данных из БД
             TokensCreator tokenCreator = new();
+            UsersCreator usersCreator = new();
+
             for (int i = 0; i < 5; i++)
             {
-                FullTokens.Append((Token)tokenCreator.GetContact());
+                FullTokens.Append((Token)tokenCreator.GetToken(), (User)usersCreator.GetUser());
             }
 
             FillListView(FullTokens);
@@ -70,9 +72,10 @@ namespace WinFormsApp1
         /// <param name="tokens"></param>
         private void FillListView(TokensViewModel tokens)
         {
-            foreach (Token token in tokens)
+
+            foreach (KeyValuePair<Token, User> token in tokens)
             {
-                ListViewItem item = token.AddToListViewItem();
+                ListViewItem item = AddToListViewItem(token);
                 listViewTokens.Items.Add(item);
             }
         }
@@ -81,31 +84,81 @@ namespace WinFormsApp1
         /// </summary>
         private void FillComboBoxStatuses()
         {
-            toolStripComboBox2.Items.Add("Все");
+            statusComboBox.Items.Add("Все");
 
             foreach (string status in (HashSet<string>)GetStatusList())
             {
-                toolStripComboBox2.Items.Add(status);
+                statusComboBox.Items.Add(status);
             }
         }
 
         private HashSet<string> GetStatusList()
         {
-            HashSet<string> statusList = new HashSet<string>();
-            foreach (Token token in FullTokens)
+            HashSet<string> statusList = new();
+            foreach (KeyValuePair<Token, User> token in FullTokens)
             {
-                statusList.Add(token.Status);
+                statusList.Add(token.Key.Status);
             }
             return statusList;
         }
 
-        private void toolStripComboBox2_SelectedIndexChanged(object sender, EventArgs e)
+        private void StatusComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
             listViewTokens.Items.Clear();
 
-            string selectStatus = toolStripComboBox2.SelectedItem.ToString();
+            string? selectStatus = statusComboBox.SelectedItem.ToString();
 
-            FillListView(new((List<Token>)FullTokens.FilterStatusList(selectStatus)));
+            if (!string.IsNullOrEmpty(selectStatus))
+            {
+                FillListView(new((Dictionary<Token, User>)FullTokens.FilterStatusList(selectStatus)));
+            }
+        }
+
+        private ListViewItem AddToListViewItem(KeyValuePair<Token, User> token)
+        {
+            ListViewItem item = new(token.Key.Id.ToString());
+
+            ListViewItem.ListViewSubItem sub1 = new();
+            ListViewItem.ListViewSubItem sub2 = new();
+            ListViewItem.ListViewSubItem sub3 = new();
+            ListViewItem.ListViewSubItem sub4 = new();
+            ListViewItem.ListViewSubItem sub5 = new();
+            ListViewItem.ListViewSubItem sub6 = new();
+            ListViewItem.ListViewSubItem sub7 = new();
+            ListViewItem.ListViewSubItem sub8 = new();
+            ListViewItem.ListViewSubItem sub9 = new();
+            ListViewItem.ListViewSubItem sub10 = new();
+            ListViewItem.ListViewSubItem sub11 = new();
+
+
+            sub1.Text = token.Key.Type;
+            sub2.Text = token.Value.FIO;
+            sub3.Text = token.Value.Department;
+            sub4.Text = token.Key.Destiny;
+            sub5.Text = token.Key.Action;
+            sub6.Text = token.Key.SerialNumber;
+            sub7.Text = token.Key.InterCertCenter;
+            sub8.Text = token.Key.RootCertCenter;
+            sub9.Text = token.Key.Status;
+            sub10.Text = token.Key.DateStart.ToString();
+            sub11.Text = token.Key.DateEnd.ToString();
+
+            item.SubItems.AddRange(new[]
+            {
+                sub1,
+                sub2,
+                sub3,
+                sub4,
+                sub5,
+                sub6,
+                sub7,
+                sub8,
+                sub9,
+                sub10,
+                sub11,
+            });
+
+            return item;
         }
     }
 }
