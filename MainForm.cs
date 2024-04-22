@@ -1,6 +1,9 @@
 using System.Collections.Generic;
+using System.Data.SqlClient;
+using System.Reflection;
 using WinFormsApp1.Infrastructure;
 using WinFormsApp1.Model;
+using WinFormsApp1.Repository;
 using WinFormsApp1.ViewModel;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
@@ -11,7 +14,6 @@ namespace WinFormsApp1
         public static TokensViewModel FullTokens = new();
         public static TokensViewModel? Filtr;
 
-
         public MainForm()
         {
             InitializeComponent();
@@ -19,16 +21,50 @@ namespace WinFormsApp1
             //Заменить на получение данных из БД
             TokensCreator tokenCreator = new();
             UsersCreator usersCreator = new();
-
             for (int i = 0; i < 5; i++)
             {
                 FullTokens.Append((Token)tokenCreator.GetToken(), (User)usersCreator.GetUser());
             }
 
-            FillListView(FullTokens);
-            FillComboBoxStatuses();
-        }
+            //CRUDRepository<Token> tokenRepository = new CRUDRepository<Token>();
+            //CRUDRepository<User> userRepository = new CRUDRepository<User>();
 
+            //SqlDataReader readerTokens = tokenRepository.GetAll();
+            //if (readerTokens.HasRows)
+            //{
+            //    while (readerTokens.Read())
+            //    {
+            //        Token token = new Token
+            //            (
+            //                Convert.ToInt32(readerTokens.GetValue(0)),
+            //                readerTokens.GetValue(1).ToString(),
+            //                readerTokens.GetValue(2).ToString(),
+            //                readerTokens.GetValue(3).ToString(),
+            //                readerTokens.GetValue(4).ToString(),
+            //                readerTokens.GetValue(5).ToString(),
+            //                readerTokens.GetValue(6).ToString(),
+            //                readerTokens.GetValue(7).ToString(),
+            //                Convert.ToDateTime(readerTokens.GetValue(8)),
+            //                Convert.ToDateTime(readerTokens.GetValue(9)),
+            //                Convert.ToInt32(readerTokens.GetValue(10))
+            //            );
+            //        User user = new User(Convert.ToInt32(readerTokens.GetValue(10)));
+            //        SqlDataReader readerUsers = userRepository.GetOne(user);
+            //        user.FIO = readerUsers.GetValue(1).ToString();
+            //        user.Department = readerUsers.GetValue(2).ToString();
+            //        user.Post = readerUsers.GetValue(3).ToString();
+
+            //        FullTokens.Append(token, user);
+            //    }
+            //    FillComboBoxStatuses();
+            //}
+            //statusComboBox.SelectedIndex = 0;
+        }
+        /// <summary>
+        /// Кнопка открытия форма добавления нового токена
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void OpenAddTokenFormButton_Click(object sender, EventArgs e)
         {
             AddTokenForm f2 = new()
@@ -61,7 +97,11 @@ namespace WinFormsApp1
             listViewTokens.Items.Clear();
             FillListView(FullTokens);
         }
-
+        /// <summary>
+        /// Кнопка поиска, еще не реализована
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void SearchButton_Click(object sender, EventArgs e)
         {
 
@@ -86,22 +126,16 @@ namespace WinFormsApp1
         {
             statusComboBox.Items.Add("Все");
 
-            foreach (string status in (HashSet<string>)GetStatusList())
+            foreach (string status in (HashSet<string>)FullTokens.GetStatusList())
             {
                 statusComboBox.Items.Add(status);
             }
         }
-
-        private HashSet<string> GetStatusList()
-        {
-            HashSet<string> statusList = new();
-            foreach (KeyValuePair<Token, User> token in FullTokens)
-            {
-                statusList.Add(token.Key.Status);
-            }
-            return statusList;
-        }
-
+        /// <summary>
+        /// Событие проиходит при изменении значения в списке выбора статуса
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void StatusComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
             listViewTokens.Items.Clear();
@@ -113,7 +147,11 @@ namespace WinFormsApp1
                 FillListView(new((Dictionary<Token, User>)FullTokens.FilterStatusList(selectStatus)));
             }
         }
-
+        /// <summary>
+        /// Заполнение ListView на главной форме
+        /// </summary>
+        /// <param name="token">передаем экземпляр пары токена и пользователя</param>
+        /// <returns></returns>
         private ListViewItem AddToListViewItem(KeyValuePair<Token, User> token)
         {
             ListViewItem item = new(token.Key.Id.ToString());
@@ -159,6 +197,11 @@ namespace WinFormsApp1
             });
 
             return item;
+        }
+
+        private void toolStripSplitButton2_ButtonClick(object sender, EventArgs e)
+        {
+
         }
     }
 }

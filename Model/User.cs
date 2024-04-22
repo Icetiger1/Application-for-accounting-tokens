@@ -8,19 +8,24 @@ namespace WinFormsApp1.Model
 {
     public class User
     {
+        public int Id { get; set; }
         public string? FIO { get; set; }
         public string? Post {  get; set; }
         public string? Department { get; set; }
 
-        public User() :
+        public User() { }
+
+        public User(int id) :
             this(
+                id,
                 String.Empty,
                 String.Empty,
                 String.Empty)
         { }
 
-        public User(string? fio, string? post, string? department)
+        public User(int id, string? fio, string? post, string? department)
         {
+            this.Id = id;
             this.FIO = fio;
             this.Post = post;
             this.Department = department;

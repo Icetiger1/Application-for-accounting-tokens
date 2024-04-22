@@ -18,6 +18,7 @@ namespace WinFormsApp1.Model
         public string? Status { get; set; }
         public DateTime DateStart { get; set; }
         public DateTime DateEnd { get; set; }
+        public int UserId { get; set; }
 
         public Token() :
             this(Int32.MinValue,
@@ -29,7 +30,8 @@ namespace WinFormsApp1.Model
                 String.Empty,
                 String.Empty,
                 DateTime.MinValue,
-                DateTime.MaxValue)
+                DateTime.MaxValue,
+                Int32.MinValue)
         { }
         public Token(
             int id, 
@@ -41,7 +43,8 @@ namespace WinFormsApp1.Model
             string? rootCertCenter,
             string? status,
             DateTime dateStart,
-            DateTime dateEnd
+            DateTime dateEnd,
+            int userId
             )
         {
             this.Id = id;
@@ -54,6 +57,12 @@ namespace WinFormsApp1.Model
             this.Status = status;
             this.DateStart = dateStart;
             this.DateEnd = dateEnd;
+            this.UserId = userId;
+        }
+
+        public override string ToString()
+        {
+            return Id.ToString();
         }
     }
 }

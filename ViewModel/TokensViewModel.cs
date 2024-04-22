@@ -68,6 +68,16 @@ namespace WinFormsApp1.ViewModel
                     .ToDictionary(x => x.Key, x => x.Value);
         }
 
+        public HashSet<string> GetStatusList()
+        {
+            HashSet<string> statusList = new();
+            foreach (KeyValuePair<Token, User> token in Tokens)
+            {
+                statusList.Add(token.Key.Status);
+            }
+            return statusList;
+        }
+
         public IEnumerator GetEnumerator()
         {
             return ((IEnumerable)this.Tokens).GetEnumerator();

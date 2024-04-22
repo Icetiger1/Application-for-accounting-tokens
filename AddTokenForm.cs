@@ -42,9 +42,10 @@ namespace WinFormsApp1
                 textBox4.Text,
                 comboBox5.SelectedItem.ToString(),
                 dateTimePicker1.Value,
-                dateTimePicker2.Value
+                dateTimePicker2.Value,
+                0
                 );
-            User user = new(
+            User user = new(1,
                 comboBox1.SelectedItem.ToString(),
                 String.Empty,
                 textBox1.Text
