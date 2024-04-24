@@ -10,6 +10,12 @@ namespace WinFormsApp1.Infrastructure
     {
         public string[] types = new string[] { "ФЛ", "ЮЛ", "ДЛ" };
         public string[] fios = new string[] { "ФИО_1", "ФИО_2", "ФИО_3" };
+        public string[] posts = new string[]
+{
+            "Специалист_1",
+            "Специалист_2",
+            "Специалист_3"
+};
         public string[] departments = new string[] { "Отдел_1", "Отдел2", "Отдел3" };
         public string[] destinys = new string[] { "ФИР", "СООН", "ЕУПС" };
         public string[] actions = new string[] { "Авторизация", "Подпись" };

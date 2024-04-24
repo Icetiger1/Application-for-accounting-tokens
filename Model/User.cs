@@ -30,5 +30,17 @@ namespace WinFormsApp1.Model
             this.Post = post;
             this.Department = department;
         }
+
+        public (bool, string) IsNotNullOrEmpty()
+        {
+            if (string.IsNullOrEmpty(this.FIO))
+                return (false, nameof(this.FIO));
+            else if (string.IsNullOrEmpty(this.Post))
+                return (false, nameof(this.Post));
+            else if (string.IsNullOrEmpty(this.Department))
+                return (false, nameof(this.Department));
+            else
+                return (true, ""); 
+        }
     }
 }

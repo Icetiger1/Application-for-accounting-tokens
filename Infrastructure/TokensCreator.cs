@@ -20,7 +20,7 @@ namespace WinFormsApp1.Infrastructure
         private readonly string[] destinys = new string[] {"ФИР", "СООН", "ЕУПС"};
         private readonly string[] actions = new string[] {"Авторизация", "Подпись" };
         private readonly string[] certCenters = new string[] { "УЦ ФНС", "УЦ ФК"};
-        private readonly string[] statuses = new string[] {"Выдан" , "Изъят", "Срок истек"};
+        private readonly string[] statuses = new string[] {"Выдан" , "Изъят"};
 
         public Token GetToken()
         {

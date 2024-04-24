@@ -1,18 +1,19 @@
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Reflection;
+using System.Windows.Forms;
 using WinFormsApp1.Infrastructure;
 using WinFormsApp1.Model;
 using WinFormsApp1.Repository;
 using WinFormsApp1.ViewModel;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
 
 namespace WinFormsApp1
 {
     public partial class MainForm : Form
     {
-        public static TokensViewModel FullTokens = new();
-        public static TokensViewModel? Filtr;
+        internal static TokensViewModel FullTokens = new();
 
         public MainForm()
         {
@@ -21,10 +22,16 @@ namespace WinFormsApp1
             //Заменить на получение данных из БД
             TokensCreator tokenCreator = new();
             UsersCreator usersCreator = new();
-            for (int i = 0; i < 5; i++)
+            for (int i = 0; i < 20; i++)
             {
                 FullTokens.Append((Token)tokenCreator.GetToken(), (User)usersCreator.GetUser());
             }
+            FillListView(FullTokens);
+            FillComboBox();
+
+            //statusComboBox.SelectedIndex = 0;
+            //toolStripComboBox2.SelectedIndex = 0;
+            //toolStripComboBox3.SelectedIndex = 0;
 
             //CRUDRepository<Token> tokenRepository = new CRUDRepository<Token>();
             //CRUDRepository<User> userRepository = new CRUDRepository<User>();
@@ -120,17 +127,20 @@ namespace WinFormsApp1
             }
         }
         /// <summary>
-        /// Заполнение toolStripComboBox2 для дальнейшей фильтрации по статусу токена
+        /// Заполнение toolStripComboBox2 3 и ... для дальнейшей фильтрации по статусу токена
         /// </summary>
-        private void FillComboBoxStatuses()
+        private void FillComboBox()
         {
             statusComboBox.Items.Add("Все");
+            statusComboBox.Items.Add("Требуется перевыпуск");
+            statusComboBox.Items.Add("Срок истек");
 
             foreach (string status in (HashSet<string>)FullTokens.GetStatusList())
             {
                 statusComboBox.Items.Add(status);
             }
         }
+
         /// <summary>
         /// Событие проиходит при изменении значения в списке выбора статуса
         /// </summary>
@@ -147,6 +157,7 @@ namespace WinFormsApp1
                 FillListView(new((Dictionary<Token, User>)FullTokens.FilterStatusList(selectStatus)));
             }
         }
+
         /// <summary>
         /// Заполнение ListView на главной форме
         /// </summary>
@@ -199,9 +210,39 @@ namespace WinFormsApp1
             return item;
         }
 
-        private void toolStripSplitButton2_ButtonClick(object sender, EventArgs e)
+        private void listViewTokens_MouseClick(object sender, MouseEventArgs e)
         {
+            listViewTokens.ContextMenuStrip = null;
+            ListViewHitTestInfo info = listViewTokens.HitTest(e.X, e.Y);
+            var selectedItem = listViewTokens.SelectedItems[0];
+            var focusedItem = listViewTokens.FocusedItem;
 
+            if (info.Item != null)
+            {
+                if (focusedItem != null && focusedItem.Bounds.Y == selectedItem.Position.Y)
+                {
+                    if (e.Button == MouseButtons.Right)
+                    {
+
+                        listViewTokens.ContextMenuStrip = contextMenuStrip1;
+                        listViewTokens.ContextMenuStrip.Show(listViewTokens, new Point(e.X, e.Y));
+                    }
+                }
+                else
+                {
+                    listViewTokens.SelectedItems.Clear();
+                    listViewTokens.FocusedItem = null;
+                    listViewTokens.Refresh();
+                }
+            }
+        }
+
+        private void contextMenuStrip1_Opening(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            if (listViewTokens.SelectedItems.Count <= 0 || listViewTokens.ContextMenuStrip != null)
+            {
+                listViewTokens.ContextMenuStrip = null;
+            }
         }
     }
 }

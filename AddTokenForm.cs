@@ -24,35 +24,55 @@ namespace WinFormsApp1
 
             FillFormCreate fillForm = new();
             comboBox1.Items.AddRange(fillForm.types);
-            comboBox2.Items.AddRange(fillForm.departments);
+            comboBox6.Items.AddRange(fillForm.departments);
             comboBox3.Items.AddRange(fillForm.destinys);
             comboBox4.Items.AddRange(fillForm.actions);
             comboBox5.Items.AddRange(fillForm.statuses);
-
+            comboBox2.Items.AddRange(MainForm.FullTokens.Tokens.Select(x => x.Value.Post).Distinct().ToArray());
         }
 
         private void AddTokenButton_Click(object sender, EventArgs e)
         {
-            Token token = new(lv.Items.Count, 
-                comboBox2.SelectedItem.ToString(),
-                comboBox3.SelectedItem.ToString(),
-                comboBox4.SelectedItem.ToString(),
+            Token token = new(
+                lv.Items.Count, 
+                comboBox1.GetItemText(comboBox1.SelectedItem),
+                comboBox3.GetItemText(comboBox3.SelectedItem),
+                comboBox4.GetItemText(comboBox4.SelectedItem),
                 textBox2.Text,
                 textBox3.Text,
                 textBox4.Text,
-                comboBox5.SelectedItem.ToString(),
+                comboBox5.GetItemText(comboBox5.SelectedItem),
                 dateTimePicker1.Value,
                 dateTimePicker2.Value,
                 0
                 );
-            User user = new(1,
-                comboBox1.SelectedItem.ToString(),
-                String.Empty,
-                textBox1.Text
+
+            User user = new(
+                1, 
+                textBox1.Text,
+                comboBox2.GetItemText(comboBox2.SelectedItem),
+                comboBox2.GetItemText(comboBox6.SelectedItem)
                 );
-            MainForm.FullTokens.Append(token, user);
-            OnButtonClicked(EventArgs.Empty);
-            this.Close();
+
+            (bool, string) turpleToken = token.IsNotNullOrEmpty();
+            (bool, string) turpleUser = user.IsNotNullOrEmpty();
+            if (turpleToken.Item1 == true)
+            {
+                if (turpleUser.Item1 == true)
+                {
+                    MainForm.FullTokens.Append(token, user);
+                    OnButtonClicked(EventArgs.Empty);
+                    this.Close();
+                }
+                else
+                {
+                    MessageBox.Show($"Не заполнено поле {turpleUser.Item2}");
+                }
+            }
+            else
+            {
+                MessageBox.Show($"Не заполнено поле {turpleToken.Item2}");
+            }
         }
 
         protected void OnButtonClicked(EventArgs e)

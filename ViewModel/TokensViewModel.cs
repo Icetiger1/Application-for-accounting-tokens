@@ -62,6 +62,20 @@ namespace WinFormsApp1.ViewModel
         {
             if (status == "Все" || string.IsNullOrEmpty(status))
                 return this.Tokens;
+
+            else if (status == "Требуется перевыпуск")
+                return this.Tokens
+                    .Where(x => (
+                    x.Key.DateEnd - DateTime.UtcNow).Days < 10 && 
+                    (x.Key.DateEnd - DateTime.UtcNow).Days > 0
+                    )
+                    .ToDictionary(x => x.Key, x => x.Value);
+
+            else if (status == "Срок истек")
+                return this.Tokens
+                    .Where(x => x.Key.DateEnd < DateTime.UtcNow)
+                    .ToDictionary(x => x.Key, x => x.Value);
+
             else
                 return this.Tokens
                     .Where(x => x.Key.Status == status)

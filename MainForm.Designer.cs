@@ -28,21 +28,23 @@
         /// </summary>
         private void InitializeComponent()
         {
+            components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             toolStrip1 = new ToolStrip();
             OpenAddTokenFormButton = new ToolStripButton();
+            toolStripButton3 = new ToolStripButton();
             DeleteTokenButton = new ToolStripButton();
             RefreshButton = new ToolStripButton();
             toolStripSeparator1 = new ToolStripSeparator();
+            toolStripSeparator5 = new ToolStripSeparator();
             toolStripComboBox1 = new ToolStripLabel();
             statusComboBox = new ToolStripComboBox();
             toolStripSplitButton1 = new ToolStripSeparator();
-            toolStripLabel1 = new ToolStripLabel();
-            toolStripComboBox2 = new ToolStripComboBox();
-            toolStripLabel2 = new ToolStripLabel();
-            toolStripComboBox3 = new ToolStripComboBox();
+            toolStripSeparator2 = new ToolStripSeparator();
+            toolStripSeparator6 = new ToolStripSeparator();
             toolStripTextBox1 = new ToolStripTextBox();
             SearchButton = new ToolStripButton();
+            toolStripSeparator4 = new ToolStripSeparator();
             listViewTokens = new ListView();
             ID = new ColumnHeader();
             Type = new ColumnHeader();
@@ -60,11 +62,13 @@
             toolStripSplitButton2 = new ToolStripSplitButton();
             загрузитьСписокПользователейActiveDirectoryToolStripMenuItem1 = new ToolStripMenuItem();
             toolStripButton2 = new ToolStripButton();
-            toolStripSeparator2 = new ToolStripSeparator();
-            toolStripSeparator3 = new ToolStripSeparator();
-            toolStripSeparator4 = new ToolStripSeparator();
+            toolStripDropDownButton1 = new ToolStripDropDownButton();
+            contextMenuStrip1 = new ContextMenuStrip(components);
+            редактироватьToolStripMenuItem = new ToolStripMenuItem();
+            удалитьToolStripMenuItem = new ToolStripMenuItem();
             toolStrip1.SuspendLayout();
             toolStrip2.SuspendLayout();
+            contextMenuStrip1.SuspendLayout();
             SuspendLayout();
             // 
             // toolStrip1
@@ -73,7 +77,7 @@
             toolStrip1.AutoSize = false;
             toolStrip1.Dock = DockStyle.None;
             toolStrip1.ImageScalingSize = new Size(18, 18);
-            toolStrip1.Items.AddRange(new ToolStripItem[] { OpenAddTokenFormButton, DeleteTokenButton, RefreshButton, toolStripSeparator1, toolStripComboBox1, statusComboBox, toolStripSplitButton1, toolStripLabel1, toolStripComboBox2, toolStripSeparator2, toolStripLabel2, toolStripComboBox3, toolStripSeparator3, toolStripTextBox1, SearchButton, toolStripSeparator4 });
+            toolStrip1.Items.AddRange(new ToolStripItem[] { OpenAddTokenFormButton, toolStripButton3, DeleteTokenButton, RefreshButton, toolStripSeparator1, toolStripSeparator5, toolStripComboBox1, statusComboBox, toolStripSplitButton1, toolStripSeparator2, toolStripSeparator6, toolStripTextBox1, SearchButton, toolStripSeparator4 });
             toolStrip1.Location = new Point(0, 25);
             toolStrip1.Name = "toolStrip1";
             toolStrip1.Size = new Size(1192, 37);
@@ -89,6 +93,15 @@
             OpenAddTokenFormButton.Size = new Size(23, 34);
             OpenAddTokenFormButton.Text = "toolStripButton1";
             OpenAddTokenFormButton.Click += OpenAddTokenFormButton_Click;
+            // 
+            // toolStripButton3
+            // 
+            toolStripButton3.DisplayStyle = ToolStripItemDisplayStyle.Image;
+            toolStripButton3.Image = (Image)resources.GetObject("toolStripButton3.Image");
+            toolStripButton3.ImageTransparentColor = Color.Magenta;
+            toolStripButton3.Name = "toolStripButton3";
+            toolStripButton3.Size = new Size(23, 34);
+            toolStripButton3.Text = "toolStripButton3";
             // 
             // DeleteTokenButton
             // 
@@ -115,6 +128,11 @@
             toolStripSeparator1.Name = "toolStripSeparator1";
             toolStripSeparator1.Size = new Size(6, 37);
             // 
+            // toolStripSeparator5
+            // 
+            toolStripSeparator5.Name = "toolStripSeparator5";
+            toolStripSeparator5.Size = new Size(6, 37);
+            // 
             // toolStripComboBox1
             // 
             toolStripComboBox1.Name = "toolStripComboBox1";
@@ -132,33 +150,21 @@
             toolStripSplitButton1.Name = "toolStripSplitButton1";
             toolStripSplitButton1.Size = new Size(6, 37);
             // 
-            // toolStripLabel1
+            // toolStripSeparator2
             // 
-            toolStripLabel1.Name = "toolStripLabel1";
-            toolStripLabel1.Size = new Size(40, 34);
-            toolStripLabel1.Text = "Отдел";
+            toolStripSeparator2.Name = "toolStripSeparator2";
+            toolStripSeparator2.Size = new Size(6, 37);
             // 
-            // toolStripComboBox2
+            // toolStripSeparator6
             // 
-            toolStripComboBox2.Name = "toolStripComboBox2";
-            toolStripComboBox2.Size = new Size(121, 37);
-            // 
-            // toolStripLabel2
-            // 
-            toolStripLabel2.Name = "toolStripLabel2";
-            toolStripLabel2.Size = new Size(27, 34);
-            toolStripLabel2.Text = "Тип";
-            // 
-            // toolStripComboBox3
-            // 
-            toolStripComboBox3.Name = "toolStripComboBox3";
-            toolStripComboBox3.Size = new Size(121, 37);
+            toolStripSeparator6.Name = "toolStripSeparator6";
+            toolStripSeparator6.Size = new Size(6, 37);
             // 
             // toolStripTextBox1
             // 
             toolStripTextBox1.AutoSize = false;
             toolStripTextBox1.Name = "toolStripTextBox1";
-            toolStripTextBox1.Size = new Size(150, 37);
+            toolStripTextBox1.Size = new Size(300, 37);
             // 
             // SearchButton
             // 
@@ -170,18 +176,25 @@
             SearchButton.Text = "Поиск";
             SearchButton.Click += SearchButton_Click;
             // 
+            // toolStripSeparator4
+            // 
+            toolStripSeparator4.Name = "toolStripSeparator4";
+            toolStripSeparator4.Size = new Size(6, 37);
+            // 
             // listViewTokens
             // 
             listViewTokens.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             listViewTokens.Columns.AddRange(new ColumnHeader[] { ID, Type, FIO, Department, Destiny, Action, SerialNumber, InterCertCenter, RootCertCenter, Status, DateStart, DateEnd });
             listViewTokens.FullRowSelect = true;
-            listViewTokens.Location = new Point(0, 65);
+            listViewTokens.HideSelection = true;
+            listViewTokens.Location = new Point(12, 65);
             listViewTokens.MultiSelect = false;
             listViewTokens.Name = "listViewTokens";
-            listViewTokens.Size = new Size(1192, 483);
+            listViewTokens.Size = new Size(1168, 474);
             listViewTokens.TabIndex = 1;
             listViewTokens.UseCompatibleStateImageBehavior = false;
             listViewTokens.View = View.Details;
+            listViewTokens.MouseClick += listViewTokens_MouseClick;
             // 
             // ID
             // 
@@ -243,10 +256,12 @@
             // 
             // toolStrip2
             // 
-            toolStrip2.Items.AddRange(new ToolStripItem[] { toolStripSplitButton2, toolStripButton2 });
+            toolStrip2.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            toolStrip2.Dock = DockStyle.None;
+            toolStrip2.Items.AddRange(new ToolStripItem[] { toolStripSplitButton2, toolStripButton2, toolStripDropDownButton1 });
             toolStrip2.Location = new Point(0, 0);
             toolStrip2.Name = "toolStrip2";
-            toolStrip2.Size = new Size(1192, 25);
+            toolStrip2.Size = new Size(286, 25);
             toolStrip2.TabIndex = 2;
             toolStrip2.Text = "toolStrip2";
             // 
@@ -259,7 +274,6 @@
             toolStripSplitButton2.Name = "toolStripSplitButton2";
             toolStripSplitButton2.Size = new Size(138, 22);
             toolStripSplitButton2.Text = "Для администратора";
-            toolStripSplitButton2.ButtonClick += toolStripSplitButton2_ButtonClick;
             // 
             // загрузитьСписокПользователейActiveDirectoryToolStripMenuItem1
             // 
@@ -276,20 +290,33 @@
             toolStripButton2.Size = new Size(107, 22);
             toolStripButton2.Text = "Выгрузить в Excel";
             // 
-            // toolStripSeparator2
+            // toolStripDropDownButton1
             // 
-            toolStripSeparator2.Name = "toolStripSeparator2";
-            toolStripSeparator2.Size = new Size(6, 37);
+            toolStripDropDownButton1.DisplayStyle = ToolStripItemDisplayStyle.Image;
+            toolStripDropDownButton1.Image = (Image)resources.GetObject("toolStripDropDownButton1.Image");
+            toolStripDropDownButton1.ImageTransparentColor = Color.Magenta;
+            toolStripDropDownButton1.Name = "toolStripDropDownButton1";
+            toolStripDropDownButton1.Size = new Size(29, 22);
+            toolStripDropDownButton1.Text = "toolStripDropDownButton1";
             // 
-            // toolStripSeparator3
+            // contextMenuStrip1
             // 
-            toolStripSeparator3.Name = "toolStripSeparator3";
-            toolStripSeparator3.Size = new Size(6, 37);
+            contextMenuStrip1.Items.AddRange(new ToolStripItem[] { редактироватьToolStripMenuItem, удалитьToolStripMenuItem });
+            contextMenuStrip1.Name = "contextMenuStrip1";
+            contextMenuStrip1.Size = new Size(155, 48);
+            contextMenuStrip1.Opening += contextMenuStrip1_Opening;
             // 
-            // toolStripSeparator4
+            // редактироватьToolStripMenuItem
             // 
-            toolStripSeparator4.Name = "toolStripSeparator4";
-            toolStripSeparator4.Size = new Size(6, 37);
+            редактироватьToolStripMenuItem.Name = "редактироватьToolStripMenuItem";
+            редактироватьToolStripMenuItem.Size = new Size(154, 22);
+            редактироватьToolStripMenuItem.Text = "Редактировать";
+            // 
+            // удалитьToolStripMenuItem
+            // 
+            удалитьToolStripMenuItem.Name = "удалитьToolStripMenuItem";
+            удалитьToolStripMenuItem.Size = new Size(154, 22);
+            удалитьToolStripMenuItem.Text = "Удалить";
             // 
             // MainForm
             // 
@@ -306,6 +333,7 @@
             toolStrip1.PerformLayout();
             toolStrip2.ResumeLayout(false);
             toolStrip2.PerformLayout();
+            contextMenuStrip1.ResumeLayout(false);
             ResumeLayout(false);
             PerformLayout();
         }
@@ -335,16 +363,18 @@
         private ColumnHeader DateStart;
         private ColumnHeader DateEnd;
         public ListView listViewTokens;
-        private ToolStripLabel toolStripLabel1;
-        private ToolStripComboBox toolStripComboBox2;
-        private ToolStripLabel toolStripLabel2;
-        private ToolStripComboBox toolStripComboBox3;
         private ToolStrip toolStrip2;
         private ToolStripSplitButton toolStripSplitButton2;
         private ToolStripMenuItem загрузитьСписокПользователейActiveDirectoryToolStripMenuItem1;
         private ToolStripButton toolStripButton2;
         private ToolStripSeparator toolStripSeparator2;
-        private ToolStripSeparator toolStripSeparator3;
         private ToolStripSeparator toolStripSeparator4;
+        private ToolStripDropDownButton toolStripDropDownButton1;
+        private ContextMenuStrip contextMenuStrip1;
+        private ToolStripMenuItem редактироватьToolStripMenuItem;
+        private ToolStripMenuItem удалитьToolStripMenuItem;
+        private ToolStripSeparator toolStripSeparator5;
+        private ToolStripSeparator toolStripSeparator6;
+        private ToolStripButton toolStripButton3;
     }
 }
