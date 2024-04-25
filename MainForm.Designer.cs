@@ -31,10 +31,10 @@
             components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             toolStrip1 = new ToolStrip();
-            OpenAddTokenFormButton = new ToolStripButton();
-            toolStripButton3 = new ToolStripButton();
-            DeleteTokenButton = new ToolStripButton();
-            RefreshButton = new ToolStripButton();
+            openAddTokenFormButton = new ToolStripButton();
+            openEditeTokenFormButton = new ToolStripButton();
+            deleteTokenButton = new ToolStripButton();
+            refreshButton = new ToolStripButton();
             toolStripSeparator1 = new ToolStripSeparator();
             toolStripSeparator5 = new ToolStripSeparator();
             toolStripComboBox1 = new ToolStripLabel();
@@ -42,7 +42,7 @@
             toolStripSplitButton1 = new ToolStripSeparator();
             toolStripSeparator2 = new ToolStripSeparator();
             toolStripSeparator6 = new ToolStripSeparator();
-            toolStripTextBox1 = new ToolStripTextBox();
+            seacherTextBox = new ToolStripTextBox();
             SearchButton = new ToolStripButton();
             toolStripSeparator4 = new ToolStripSeparator();
             listViewTokens = new ListView();
@@ -77,51 +77,52 @@
             toolStrip1.AutoSize = false;
             toolStrip1.Dock = DockStyle.None;
             toolStrip1.ImageScalingSize = new Size(18, 18);
-            toolStrip1.Items.AddRange(new ToolStripItem[] { OpenAddTokenFormButton, toolStripButton3, DeleteTokenButton, RefreshButton, toolStripSeparator1, toolStripSeparator5, toolStripComboBox1, statusComboBox, toolStripSplitButton1, toolStripSeparator2, toolStripSeparator6, toolStripTextBox1, SearchButton, toolStripSeparator4 });
+            toolStrip1.Items.AddRange(new ToolStripItem[] { openAddTokenFormButton, openEditeTokenFormButton, deleteTokenButton, refreshButton, toolStripSeparator1, toolStripSeparator5, toolStripComboBox1, statusComboBox, toolStripSplitButton1, toolStripSeparator2, toolStripSeparator6, seacherTextBox, SearchButton, toolStripSeparator4 });
             toolStrip1.Location = new Point(0, 25);
             toolStrip1.Name = "toolStrip1";
             toolStrip1.Size = new Size(1192, 37);
             toolStrip1.TabIndex = 0;
             toolStrip1.Text = "toolStrip1";
             // 
-            // OpenAddTokenFormButton
+            // openAddTokenFormButton
             // 
-            OpenAddTokenFormButton.DisplayStyle = ToolStripItemDisplayStyle.Image;
-            OpenAddTokenFormButton.Image = Properties.Resources.add;
-            OpenAddTokenFormButton.ImageTransparentColor = Color.Magenta;
-            OpenAddTokenFormButton.Name = "OpenAddTokenFormButton";
-            OpenAddTokenFormButton.Size = new Size(23, 34);
-            OpenAddTokenFormButton.Text = "toolStripButton1";
-            OpenAddTokenFormButton.Click += OpenAddTokenFormButton_Click;
+            openAddTokenFormButton.DisplayStyle = ToolStripItemDisplayStyle.Image;
+            openAddTokenFormButton.Image = Properties.Resources.add;
+            openAddTokenFormButton.ImageTransparentColor = Color.Magenta;
+            openAddTokenFormButton.Name = "openAddTokenFormButton";
+            openAddTokenFormButton.Size = new Size(23, 34);
+            openAddTokenFormButton.Text = "toolStripButton1";
+            openAddTokenFormButton.Click += OpenAddTokenFormButton_Click;
             // 
-            // toolStripButton3
+            // openEditeTokenFormButton
             // 
-            toolStripButton3.DisplayStyle = ToolStripItemDisplayStyle.Image;
-            toolStripButton3.Image = (Image)resources.GetObject("toolStripButton3.Image");
-            toolStripButton3.ImageTransparentColor = Color.Magenta;
-            toolStripButton3.Name = "toolStripButton3";
-            toolStripButton3.Size = new Size(23, 34);
-            toolStripButton3.Text = "toolStripButton3";
+            openEditeTokenFormButton.DisplayStyle = ToolStripItemDisplayStyle.Image;
+            openEditeTokenFormButton.Image = (Image)resources.GetObject("openEditeTokenFormButton.Image");
+            openEditeTokenFormButton.ImageTransparentColor = Color.Magenta;
+            openEditeTokenFormButton.Name = "openEditeTokenFormButton";
+            openEditeTokenFormButton.Size = new Size(23, 34);
+            openEditeTokenFormButton.Text = "toolStripButton3";
+            openEditeTokenFormButton.Click += OpenEditeTokenFormButton_Click;
             // 
-            // DeleteTokenButton
+            // deleteTokenButton
             // 
-            DeleteTokenButton.DisplayStyle = ToolStripItemDisplayStyle.Image;
-            DeleteTokenButton.Image = Properties.Resources.del;
-            DeleteTokenButton.ImageTransparentColor = Color.Magenta;
-            DeleteTokenButton.Name = "DeleteTokenButton";
-            DeleteTokenButton.Size = new Size(23, 34);
-            DeleteTokenButton.Text = "toolStripButton2";
-            DeleteTokenButton.Click += DeleteTokenButton_Click;
+            deleteTokenButton.DisplayStyle = ToolStripItemDisplayStyle.Image;
+            deleteTokenButton.Image = Properties.Resources.del;
+            deleteTokenButton.ImageTransparentColor = Color.Magenta;
+            deleteTokenButton.Name = "deleteTokenButton";
+            deleteTokenButton.Size = new Size(23, 34);
+            deleteTokenButton.Text = "toolStripButton2";
+            deleteTokenButton.Click += DeleteTokenButton_Click;
             // 
-            // RefreshButton
+            // refreshButton
             // 
-            RefreshButton.DisplayStyle = ToolStripItemDisplayStyle.Text;
-            RefreshButton.Image = (Image)resources.GetObject("RefreshButton.Image");
-            RefreshButton.ImageTransparentColor = Color.Magenta;
-            RefreshButton.Name = "RefreshButton";
-            RefreshButton.Size = new Size(65, 34);
-            RefreshButton.Text = "Обновить";
-            RefreshButton.Click += RefreshButton_Click;
+            refreshButton.DisplayStyle = ToolStripItemDisplayStyle.Text;
+            refreshButton.Image = (Image)resources.GetObject("refreshButton.Image");
+            refreshButton.ImageTransparentColor = Color.Magenta;
+            refreshButton.Name = "refreshButton";
+            refreshButton.Size = new Size(65, 34);
+            refreshButton.Text = "Обновить";
+            refreshButton.Click += RefreshButton_Click;
             // 
             // toolStripSeparator1
             // 
@@ -160,11 +161,11 @@
             toolStripSeparator6.Name = "toolStripSeparator6";
             toolStripSeparator6.Size = new Size(6, 37);
             // 
-            // toolStripTextBox1
+            // seacherTextBox
             // 
-            toolStripTextBox1.AutoSize = false;
-            toolStripTextBox1.Name = "toolStripTextBox1";
-            toolStripTextBox1.Size = new Size(300, 37);
+            seacherTextBox.AutoSize = false;
+            seacherTextBox.Name = "seacherTextBox";
+            seacherTextBox.Size = new Size(300, 37);
             // 
             // SearchButton
             // 
@@ -341,14 +342,14 @@
         #endregion
 
         private ToolStrip toolStrip1;
-        private ToolStripButton OpenAddTokenFormButton;
-        private ToolStripButton DeleteTokenButton;
-        private ToolStripButton RefreshButton;
+        private ToolStripButton openAddTokenFormButton;
+        private ToolStripButton deleteTokenButton;
+        private ToolStripButton refreshButton;
         private ToolStripSeparator toolStripSeparator1;
         private ToolStripLabel toolStripComboBox1;
         private ToolStripComboBox statusComboBox;
         private ToolStripSeparator toolStripSplitButton1;
-        private ToolStripTextBox toolStripTextBox1;
+        private ToolStripTextBox seacherTextBox;
         private ToolStripButton SearchButton;
         private ColumnHeader ID;
         private ColumnHeader Type;
@@ -375,6 +376,6 @@
         private ToolStripMenuItem удалитьToolStripMenuItem;
         private ToolStripSeparator toolStripSeparator5;
         private ToolStripSeparator toolStripSeparator6;
-        private ToolStripButton toolStripButton3;
+        private ToolStripButton openEditeTokenFormButton;
     }
 }

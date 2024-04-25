@@ -18,6 +18,8 @@ namespace WinFormsApp1
 
             TokensCreator tokenCreator = new();
             UsersCreator usersCreator = new();
+            FullTokens = new();
+
             for (int i = 0; i < 20; i++)
             {
                 FullTokens.Append((Token)tokenCreator.GetToken(), (User)usersCreator.GetUser());
@@ -37,12 +39,13 @@ namespace WinFormsApp1
         /// <param name="e"></param>
         private void OpenAddTokenFormButton_Click(object sender, EventArgs e)
         {
-            AddTokenForm f2 = new()
+            AddTokenForm form = new()
             {
                 lv = listViewTokens
             };
-            f2.ButtonClicked += RefreshButton_Click;
-            f2.Show();
+
+            form.ButtonClicked += RefreshButton_Click;
+            form.Show();
         }
 
         /// <summary>
@@ -200,12 +203,6 @@ namespace WinFormsApp1
                         listViewTokens.ContextMenuStrip.Show(listViewTokens, new Point(e.X, e.Y));
                     }
                 }
-                else
-                {
-                    listViewTokens.SelectedItems.Clear();
-                    listViewTokens.FocusedItem = null;
-                    listViewTokens.Refresh();
-                }
             }
         }
 
@@ -220,6 +217,33 @@ namespace WinFormsApp1
             if (listViewTokens.SelectedItems.Count <= 0 || listViewTokens.ContextMenuStrip != null)
             {
                 listViewTokens.ContextMenuStrip = null;
+            }
+        }
+
+        private void OpenEditeTokenFormButton_Click(object sender, EventArgs e)
+        {
+            if (listViewTokens.SelectedItems.Count > 0)
+            {
+                ListViewItem selectedItem = listViewTokens.SelectedItems[0];
+                EditeTokenForm form = new()
+                {
+                    lv = listViewTokens,
+                };
+
+                form.comboBox1.Text = selectedItem.SubItems[1].Text;
+                form.textBox1.Text = selectedItem.SubItems[2].Text;
+                form.comboBox6.Text = selectedItem.SubItems[3].Text;
+                form.comboBox3.Text = selectedItem.SubItems[4].Text;
+                form.comboBox4.Text = selectedItem.SubItems[5].Text;
+                form.textBox2.Text = selectedItem.SubItems[6].Text;
+                form.textBox3.Text = selectedItem.SubItems[7].Text;
+                form.textBox4.Text = selectedItem.SubItems[8].Text;
+                form.comboBox5.Text = selectedItem.SubItems[9].Text;
+                form.dateTimePicker1.Text = selectedItem.SubItems[10].Text;
+                form.dateTimePicker2.Text = selectedItem.SubItems[11].Text;
+
+                form.ButtonClicked += RefreshButton_Click;
+                form.Show();
             }
         }
     }

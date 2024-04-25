@@ -1,6 +1,6 @@
 ﻿namespace WinFormsApp1
 {
-    partial class AddTokenForm
+    partial class EditeTokenForm
     {
         /// <summary>
         /// Required designer variable.
@@ -307,9 +307,9 @@
             button1.Name = "button1";
             button1.Size = new Size(83, 22);
             button1.TabIndex = 1;
-            button1.Text = "Добавить";
+            button1.Text = "Сохранить";
             button1.UseVisualStyleBackColor = true;
-            button1.Click += AddTokenButton_Click;
+            button1.Click += EditeTokenButton_Click;
             // 
             // button2
             // 
@@ -321,7 +321,7 @@
             button2.UseVisualStyleBackColor = true;
             button2.Click += button2_Click;
             // 
-            // AddTokenForm
+            // EditeTokenForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
@@ -331,9 +331,9 @@
             Controls.Add(groupBox1);
             MaximizeBox = false;
             MinimizeBox = false;
-            Name = "AddTokenForm";
+            Name = "EditeTokenForm";
             StartPosition = FormStartPosition.CenterScreen;
-            Text = "Add new token";
+            Text = "Edite token";
             groupBox1.ResumeLayout(false);
             groupBox1.PerformLayout();
             ResumeLayout(false);

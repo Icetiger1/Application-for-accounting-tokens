@@ -14,12 +14,12 @@ using WinFormsApp1.ViewModel;
 
 namespace WinFormsApp1
 {
-    public partial class AddTokenForm : Form
+    public partial class EditeTokenForm : Form
     {
         public ListView lv = new();
         public EventHandler ButtonClicked;
 
-        public AddTokenForm()
+        public EditeTokenForm()
         {
             InitializeComponent();
 
@@ -32,7 +32,7 @@ namespace WinFormsApp1
             comboBox2.Items.AddRange(MainForm.FullTokens.Tokens.Select(x => x.Value.Post).Distinct().ToArray());
         }
 
-        public void AddTokenButton_Click(object sender, EventArgs e)
+        public void EditeTokenButton_Click(object sender, EventArgs e)
         {
             Token token = new(
                 lv.Items.Count,
@@ -61,7 +61,7 @@ namespace WinFormsApp1
             {
                 if (turpleUser.Item1 == true)
                 {
-                    MainForm.FullTokens.Append(token, user);
+                    MainForm.FullTokens.Update(token.Id, token, user);
                     OnButtonClicked(EventArgs.Empty);
                     this.Close();
                 }
@@ -74,11 +74,6 @@ namespace WinFormsApp1
             {
                 MessageBox.Show($"Не заполнены сведения о токене или сертификате, поле {turpleToken.Item2}");
             }
-        }
-
-        public void EditeTokenButton_Click(object sender, EventArgs e)
-        {
-
         }
 
         protected void OnButtonClicked(EventArgs e)
