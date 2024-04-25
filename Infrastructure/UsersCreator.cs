@@ -24,8 +24,8 @@ namespace WinFormsApp1.Infrastructure
         private readonly string[] departments = new string[] 
         { 
             "Отдел_1", 
-            "Отдел2", 
-            "Отдел3" 
+            "Отдел_2", 
+            "Отдел_3" 
         };
 
         public User GetUser()

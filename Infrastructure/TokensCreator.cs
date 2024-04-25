@@ -16,11 +16,33 @@ namespace WinFormsApp1.Infrastructure
             globalId = 1;
         }
 
-        private readonly string[] types = new string[] {"ФЛ", "ЮЛ", "ДЛ"};
-        private readonly string[] destinys = new string[] {"ФИР", "СООН", "ЕУПС"};
-        private readonly string[] actions = new string[] {"Авторизация", "Подпись" };
-        private readonly string[] certCenters = new string[] { "УЦ ФНС", "УЦ ФК"};
-        private readonly string[] statuses = new string[] {"Выдан" , "Изъят"};
+        private readonly string[] types = new string[] 
+        {
+            "ФЛ", 
+            "ЮЛ", 
+            "ДЛ"
+        };
+        private readonly string[] destinys = new string[] 
+        {
+            "Подсистема_1",
+            "Подсистема_2",
+            "Подсистема_3"
+        };
+        private readonly string[] actions = new string[] 
+        {
+            "Авторизация", 
+            "Подпись" 
+        };
+        private readonly string[] certCenters = new string[] 
+        { 
+            "УЦ ФНС", 
+            "УЦ ФК"
+        };
+        private readonly string[] statuses = new string[] 
+        {
+            "Выдан" , 
+            "Изъят"
+        };
 
         public Token GetToken()
         {

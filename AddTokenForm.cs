@@ -66,12 +66,12 @@ namespace WinFormsApp1
                 }
                 else
                 {
-                    MessageBox.Show($"Не заполнено поле {turpleUser.Item2}");
+                    MessageBox.Show($"Не заполнены сведения о пользователе, поле {turpleUser.Item2}");
                 }
             }
             else
             {
-                MessageBox.Show($"Не заполнено поле {turpleToken.Item2}");
+                MessageBox.Show($"Не заполнены сведения о токене или сертификате, поле {turpleToken.Item2}");
             }
         }
 

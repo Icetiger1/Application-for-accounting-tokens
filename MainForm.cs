@@ -176,6 +176,12 @@ namespace WinFormsApp1
             return item;
         }
 
+        /// <summary>
+        /// Событие клика кнопкой мыши по объекту listViewTokens, необходимо, 
+        /// чтобы при клике правой кнопкой мыши по строке вызывалось контекстное меню
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void listViewTokens_MouseClick(object sender, MouseEventArgs e)
         {
             listViewTokens.ContextMenuStrip = null;
@@ -203,6 +209,12 @@ namespace WinFormsApp1
             }
         }
 
+        /// <summary>
+        /// Событие, вызываемой при открытии контекстного меню.
+        /// Если ни одна строка listViewTokens не выделена то меню не вызывается
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void contextMenuStrip1_Opening(object sender, System.ComponentModel.CancelEventArgs e)
         {
             if (listViewTokens.SelectedItems.Count <= 0 || listViewTokens.ContextMenuStrip != null)

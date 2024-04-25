@@ -29,7 +29,7 @@ namespace WinFormsApp1.Repository
                 sqlConnection);
             SqlDataReader dataReader;
 
-            using (sqlConnection)
+            try
             {
                 sqlConnection.Open();
                 dataReader = sqlCommand.ExecuteReader();
@@ -37,6 +37,10 @@ namespace WinFormsApp1.Repository
                 dataReader.Close();
                 CloseConnection();
                 return dataReader;
+            }
+            catch (Exception ex) 
+            {
+                throw new Exception(ex.Message);
             }
         }
 
@@ -64,35 +68,49 @@ namespace WinFormsApp1.Repository
 
         public void Update(T t)
         {
-            using (sqlConnection)
+            try
             {
                 sqlConnection.Open();
                 SqlCommand sqlCommand = new SqlCommand(
                     $"UPDATE TOKENS " +
                     $"WHERE ID = '{GetId(t)}';", 
                     sqlConnection);
-
                 sqlCommand.ExecuteNonQuery();
+
+                SqlCommand sqlCommand2 = new SqlCommand(
+                    $"UPDATE USERS " +
+                    $"WHERE ID = '{GetUserId(t)}';",
+                    sqlConnection);
+                sqlCommand.ExecuteNonQuery();
+
                 CloseConnection();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
             }
         }
 
         public void Create(T t)
         {
-            using (sqlConnection)
+            try
             {
                 sqlConnection.Open();
                 SqlCommand sqlCommand = new SqlCommand(
-                    $"INSERT INTO TOKENS", 
+                    $"INSERT INTO TOKENS...", 
                     sqlConnection);
                 sqlCommand.ExecuteNonQuery();
                 CloseConnection();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
             }
         }
 
         public void Delete(T t)
         {
-            using (sqlConnection)
+            try
             {
                 sqlConnection.Open();
                 SqlCommand sqlCommand = new SqlCommand(
@@ -103,6 +121,10 @@ namespace WinFormsApp1.Repository
                 sqlCommand.ExecuteNonQuery();
                 CloseConnection();
             }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
         }
 
         public void CloseConnection()
@@ -110,12 +132,18 @@ namespace WinFormsApp1.Repository
             if (sqlConnection.State == ConnectionState.Open)
             {
                 sqlConnection.Close();
+                sqlConnection.Dispose();
             }
         }
 
         public int GetId(T t)
         {
             return Convert.ToInt32(t.GetType().GetProperty("Id").GetValue(t, null).ToString());
+        }
+
+        public int GetUserId(T t)
+        {
+            return Convert.ToInt32(t.GetType().GetProperty("UserId").GetValue(t, null).ToString());
         }
     }
 }
