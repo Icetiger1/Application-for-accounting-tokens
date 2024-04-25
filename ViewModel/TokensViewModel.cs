@@ -2,6 +2,8 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Data;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -18,6 +20,41 @@ namespace WinFormsApp1.ViewModel
         public TokensViewModel()
         {
             this.Tokens = new Dictionary<Token, User>();
+        }
+
+        public TokensViewModel(SqlDataReader readerTokens)
+        {
+            this.Tokens = new Dictionary<Token, User>();
+
+            if (readerTokens.HasRows)
+            {
+                while (readerTokens.Read())
+                {
+                    Token token = new Token
+                        (
+                            Convert.ToInt32(readerTokens.GetValue(0)),
+                            readerTokens.GetValue(1).ToString(),
+                            readerTokens.GetValue(2).ToString(),
+                            readerTokens.GetValue(3).ToString(),
+                            readerTokens.GetValue(4).ToString(),
+                            readerTokens.GetValue(5).ToString(),
+                            readerTokens.GetValue(6).ToString(),
+                            readerTokens.GetValue(7).ToString(),
+                            Convert.ToDateTime(readerTokens.GetValue(8)),
+                            Convert.ToDateTime(readerTokens.GetValue(9)),
+                            Convert.ToInt32(readerTokens.GetValue(10))
+                        );
+                    User user = new User
+                        (
+                            Convert.ToInt32(readerTokens.GetValue(10)),
+                            readerTokens.GetValue(11).ToString(),
+                            readerTokens.GetValue(12).ToString(),
+                            readerTokens.GetValue(13).ToString()
+                        );
+
+                    this.Tokens.Add(token, user);
+                }
+            }
         }
 
         public TokensViewModel(Dictionary<Token, User> tokens)

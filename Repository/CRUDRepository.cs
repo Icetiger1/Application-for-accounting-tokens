@@ -13,7 +13,6 @@ namespace WinFormsApp1.Repository
     public class CRUDRepository<T> : ICRUDReporitory<T> where T : class
     {
         private SqlConnection sqlConnection;
-        private T t;
         private readonly string connString = string.Empty;
 
         public CRUDRepository()
@@ -24,7 +23,9 @@ namespace WinFormsApp1.Repository
         public SqlDataReader GetAll()
         {
             SqlCommand sqlCommand = new SqlCommand(
-                $"SELECT * FROM {t.GetType().Name};", 
+                $"SELECT * FROM TOKENS AS t" +
+                $"JOIN USERS AS u" +
+                $"ON t.USER_ID = u.ID;", 
                 sqlConnection);
             SqlDataReader dataReader;
 
@@ -43,17 +44,21 @@ namespace WinFormsApp1.Repository
         { 
             SqlCommand sqlCommand = new SqlCommand(
                 $"SELECT * " +
-                $"FROM  {t.GetType().Name} " +
+                $"FROM  TOKENS " +
                 $"WHERE ID = '{GetId(t)}'", 
                 sqlConnection);
 
-            using (sqlConnection)
+            try
             {
                 sqlConnection.Open();
                 SqlDataReader dataReader = sqlCommand.ExecuteReader();
                 dataReader.Close();
                 CloseConnection();
                 return dataReader;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
             }
         }
 
@@ -63,7 +68,7 @@ namespace WinFormsApp1.Repository
             {
                 sqlConnection.Open();
                 SqlCommand sqlCommand = new SqlCommand(
-                    $"UPDATE {t.GetType().Name} " +
+                    $"UPDATE TOKENS " +
                     $"WHERE ID = '{GetId(t)}';", 
                     sqlConnection);
 
@@ -72,13 +77,13 @@ namespace WinFormsApp1.Repository
             }
         }
 
-        public void Write(T t)
+        public void Create(T t)
         {
             using (sqlConnection)
             {
                 sqlConnection.Open();
                 SqlCommand sqlCommand = new SqlCommand(
-                    $"INSERT ...", 
+                    $"INSERT INTO TOKENS", 
                     sqlConnection);
                 sqlCommand.ExecuteNonQuery();
                 CloseConnection();
@@ -91,7 +96,7 @@ namespace WinFormsApp1.Repository
             {
                 sqlConnection.Open();
                 SqlCommand sqlCommand = new SqlCommand(
-                    $"DELETE {t.GetType().Name} " +
+                    $"DELETE TOKENS " +
                     $"WHERE ID = '{GetId(t)}'", 
                     sqlConnection);
 

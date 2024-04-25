@@ -12,7 +12,7 @@ namespace WinFormsApp1.Repository
         int GetId(T t);
         SqlDataReader GetAll();
         SqlDataReader GetOne(T t);
-        void Write(T t);
+        void Create(T t);
         void Update(T t);
         void Delete(T t);
 
