@@ -87,9 +87,9 @@
             groupBox1.Controls.Add(label2);
             groupBox1.Controls.Add(comboBox1);
             groupBox1.Controls.Add(label1);
-            groupBox1.Location = new Point(12, 11);
+            groupBox1.Location = new Point(12, 5);
             groupBox1.Name = "groupBox1";
-            groupBox1.Size = new Size(713, 317);
+            groupBox1.Size = new Size(713, 323);
             groupBox1.TabIndex = 0;
             groupBox1.TabStop = false;
             groupBox1.Text = "Новый Токен";
@@ -113,7 +113,7 @@
             // 
             // button3
             // 
-            button3.Location = new Point(582, 10);
+            button3.Location = new Point(582, 16);
             button3.Name = "button3";
             button3.Size = new Size(119, 44);
             button3.TabIndex = 22;
@@ -220,9 +220,9 @@
             // comboBox4
             // 
             comboBox4.FormattingEnabled = true;
-            comboBox4.Location = new Point(422, 133);
+            comboBox4.Location = new Point(433, 133);
             comboBox4.Name = "comboBox4";
-            comboBox4.Size = new Size(279, 23);
+            comboBox4.Size = new Size(268, 23);
             comboBox4.TabIndex = 9;
             // 
             // label5
@@ -247,9 +247,9 @@
             label4.AutoSize = true;
             label4.Location = new Point(6, 136);
             label4.Name = "label4";
-            label4.Size = new Size(73, 15);
+            label4.Size = new Size(76, 15);
             label4.TabIndex = 6;
-            label4.Text = "Назначение";
+            label4.Text = "Назначение:";
             // 
             // comboBox2
             // 
@@ -262,7 +262,7 @@
             // label3
             // 
             label3.AutoSize = true;
-            label3.Location = new Point(9, 102);
+            label3.Location = new Point(6, 102);
             label3.Name = "label3";
             label3.Size = new Size(95, 15);
             label3.TabIndex = 4;

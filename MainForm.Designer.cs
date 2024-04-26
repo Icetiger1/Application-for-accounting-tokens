@@ -297,8 +297,9 @@
             toolStripDropDownButton1.Image = (Image)resources.GetObject("toolStripDropDownButton1.Image");
             toolStripDropDownButton1.ImageTransparentColor = Color.Magenta;
             toolStripDropDownButton1.Name = "toolStripDropDownButton1";
-            toolStripDropDownButton1.Size = new Size(29, 22);
+            toolStripDropDownButton1.Size = new Size(29, 20);
             toolStripDropDownButton1.Text = "toolStripDropDownButton1";
+            toolStripDropDownButton1.Click += HelpDropDownButton_Click;
             // 
             // contextMenuStrip1
             // 

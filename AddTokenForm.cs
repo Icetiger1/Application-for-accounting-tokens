@@ -76,11 +76,6 @@ namespace WinFormsApp1
             }
         }
 
-        public void EditeTokenButton_Click(object sender, EventArgs e)
-        {
-
-        }
-
         protected void OnButtonClicked(EventArgs e)
         {
             var evt = ButtonClicked;

@@ -33,7 +33,7 @@ namespace WinFormsApp1
         }
 
         /// <summary>
-        /// Кнопка открытия форма добавления нового токена
+        /// Кнопка открытия формы добавления нового токена
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -46,6 +46,39 @@ namespace WinFormsApp1
 
             form.ButtonClicked += RefreshButton_Click;
             form.Show();
+        }
+
+        /// <summary>
+        /// Кнопка открытия формы редактирование выбранного токена токена
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void OpenEditeTokenFormButton_Click(object sender, EventArgs e)
+        {
+            if (listViewTokens.SelectedItems.Count > 0)
+            {
+                ListViewItem selectedItem = listViewTokens.SelectedItems[0];
+                EditeTokenForm form = new()
+                {
+                    lv = listViewTokens,
+                };
+
+                form.comboBox1.Text = selectedItem.SubItems[1].Text;
+                form.textBox1.Text = selectedItem.SubItems[2].Text;
+                form.comboBox6.Text = selectedItem.SubItems[3].Text;
+                form.comboBox3.Text = selectedItem.SubItems[4].Text;
+                form.comboBox4.Text = selectedItem.SubItems[5].Text;
+                form.textBox2.Text = selectedItem.SubItems[6].Text;
+                form.textBox3.Text = selectedItem.SubItems[7].Text;
+                form.textBox4.Text = selectedItem.SubItems[8].Text;
+                form.comboBox5.Text = selectedItem.SubItems[9].Text;
+                form.dateTimePicker1.Text = selectedItem.SubItems[10].Text;
+                form.dateTimePicker2.Text = selectedItem.SubItems[11].Text;
+
+                form.groupBox1.Text += $"№{selectedItem.SubItems[0].Text}";
+                form.ButtonClicked += RefreshButton_Click;
+                form.Show();
+            }
         }
 
         /// <summary>
@@ -73,15 +106,6 @@ namespace WinFormsApp1
             FillListView(FullTokens);
         }
 
-        /// <summary>
-        /// Кнопка поиска, еще не реализована
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void SearchButton_Click(object sender, EventArgs e)
-        {
-
-        }
 
         /// <summary>
         /// Заполнение listViewTokens
@@ -220,31 +244,26 @@ namespace WinFormsApp1
             }
         }
 
-        private void OpenEditeTokenFormButton_Click(object sender, EventArgs e)
+        /// <summary>
+        /// Кнопка вызова окна "Справка" со сведениями о программе и краткой справки
+        /// еще не реализована
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void HelpDropDownButton_Click(object sender, EventArgs e)
         {
-            if (listViewTokens.SelectedItems.Count > 0)
-            {
-                ListViewItem selectedItem = listViewTokens.SelectedItems[0];
-                EditeTokenForm form = new()
-                {
-                    lv = listViewTokens,
-                };
 
-                form.comboBox1.Text = selectedItem.SubItems[1].Text;
-                form.textBox1.Text = selectedItem.SubItems[2].Text;
-                form.comboBox6.Text = selectedItem.SubItems[3].Text;
-                form.comboBox3.Text = selectedItem.SubItems[4].Text;
-                form.comboBox4.Text = selectedItem.SubItems[5].Text;
-                form.textBox2.Text = selectedItem.SubItems[6].Text;
-                form.textBox3.Text = selectedItem.SubItems[7].Text;
-                form.textBox4.Text = selectedItem.SubItems[8].Text;
-                form.comboBox5.Text = selectedItem.SubItems[9].Text;
-                form.dateTimePicker1.Text = selectedItem.SubItems[10].Text;
-                form.dateTimePicker2.Text = selectedItem.SubItems[11].Text;
-
-                form.ButtonClicked += RefreshButton_Click;
-                form.Show();
-            }
         }
+        
+        /// <summary>
+        /// Кнопка поиска, еще не реализована
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void SearchButton_Click(object sender, EventArgs e)
+        {
+
+        }
+
     }
 }

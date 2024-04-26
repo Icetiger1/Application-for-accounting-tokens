@@ -9,7 +9,8 @@ namespace WinFormsApp1.Repository
 {
     internal interface ICRUDReporitory<T> where T : class 
     {
-        int GetId(T t);
+        int? GetId(T t);
+        int? GetUserId(T t);
         SqlDataReader GetAll();
         SqlDataReader GetOne(T t);
         void Create(T t);
